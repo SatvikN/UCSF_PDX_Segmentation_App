@@ -1,6 +1,6 @@
 # PDX Segmentation App
 
-![PDX Segmentation App](docs/images/PDX Segmentation Home Page.jpeg)
+![PDX Segmentation App](docs/images/PDX_Segmentation_Home_Page.jpeg)
 
 End-to-end imaging app: React frontend + FastAPI backend.
 
