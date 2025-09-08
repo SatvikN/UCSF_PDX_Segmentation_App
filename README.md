@@ -30,6 +30,56 @@ Notes:
 - macOS/Windows run CPU-only. GPU mode requires Linux and NVIDIA toolkit.
 - The image includes TensorFlow CPU by default; adjust as needed for your platform.
 
+## First-time setup from GitHub
+
+If you're cloning this repository on a new machine, follow these steps:
+
+### Prerequisites
+- **Git** installed
+- **Python 3.11+** installed
+- **Node.js 18+** and **npm** installed
+- **Docker** (optional, for containerized deployment)
+
+### Step 1: Clone the repository
+```bash
+git clone <your-repo-url>
+cd pdx-segmentation-app
+```
+
+### Step 2: Download model weights
+**⚠️ IMPORTANT**: The app requires pre-trained model weights to function.
+
+1. **Download the model weights** from the release page or your storage location
+2. **Place them in the correct directories**:
+   ```bash
+   # Create directories
+   mkdir -p backend/app/models/segmentation_model/weights/
+   mkdir -p backend/app/models/classifier_model/weights/
+   
+   # Copy your downloaded weights (replace paths with your actual files)
+   cp /path/to/your/model_r2udensenet.hdf5 backend/app/models/segmentation_model/weights/
+   cp /path/to/your/model_resnet50.hdf5 backend/app/models/classifier_model/weights/
+   ```
+
+### Step 3: Choose your deployment method
+
+#### Option A: Docker (Recommended)
+```bash
+# Make run script executable
+chmod +x run.sh
+
+# Run with Docker
+./run.sh                    # CPU
+GPU=1 ./run.sh              # GPU (Linux + NVIDIA)
+```
+
+#### Option B: Local development
+Follow the "Local development" section below.
+
+### Step 4: Access the application
+- **Web interface**: http://localhost:3000 (if using local development) or http://localhost:8000 (if using Docker)
+- **API documentation**: http://localhost:8000/docs
+
 ## Local development (run frontend and backend separately)
 
 Prerequisites:
