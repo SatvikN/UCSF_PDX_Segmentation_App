@@ -1,0 +1,30 @@
+# Node
+node_modules
+frontend/node_modules
+
+# Python
+__pycache__
+*.pyc
+.env
+backend/.venv
+backend/venv
+.mypy_cache
+.pytest_cache
+
+# MacOS
+.DS_Store
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+
+# Local data
+app_data/
+
+# Build artifacts
+frontend/build
+dist
+build

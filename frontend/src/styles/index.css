@@ -1,0 +1,275 @@
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.layout {
+  height: 100vh;
+  width: 100vw;
+  align-items: left;
+}
+.container1 {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+.header {
+  height: 10vh;
+  width: 100vw;
+  display: flex;
+  background-color: #878D96;
+  align-items: center;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  flex: 0 0 clamp(180px, 15vw, 320px);
+  justify-content: space-around;
+  align-items: center;
+  background-color: #E1E3E5;
+}
+.main-container {
+  padding: 0.5rem;
+  height: 90vh;
+  width: auto;
+  flex: 1 1 auto;
+  background: linear-gradient(90deg, #ffffff, #E2F4FC);
+  overflow: hidden;
+}
+
+.welcome-panel {
+  height: 100%;
+  overflow: hidden;
+}
+
+.nav-link {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  padding: 20%;
+  margin:10%;
+  border: 2px solid #963;
+  background-color: #369;
+}
+
+.active {
+  background-color:  #69c;
+  color: white;
+}
+
+/* header parts */
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 100%;
+  width: auto;
+  min-width: 160px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1 1 auto;
+}
+.header-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: auto;
+  margin: 0 auto;
+}
+.logo {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  padding: 5%;
+}
+.path-container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+}
+.path-label {
+  font-size: 16pt;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.path-label .form-label {
+  margin-bottom: 0;
+}
+.path-input {
+  width: clamp(240px, 50vw, 900px);
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+}
+.path-button {
+  cursor: pointer;
+}
+
+.toggleContainer { display: flex; width: 100%; justify-content: center; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+.imageContainer { display: flex; flex-direction: column; justify-content: center; place-items: center; margin: 0 auto; padding: 0 1vw; width: 65vh; }
+.imageBarContainer { display: flex; height: auto; width: 100%; justify-content: center; align-items: center; gap: clamp(1rem, 6vw, 12rem); margin-top: 0.75rem; margin-bottom: 1rem; }
+.image {
+  height: 60vh;
+  width: auto;
+}
+.imageBarContainer {
+  display: flex;
+  height: auto;
+  width: 100%; 
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 6vw, 12rem);
+}
+.leftButton, .rightButton {
+  width: 6vw;
+  min-width: 70px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.toggleContainer {
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+}
+.toggleButton {
+  height: auto;
+  width: 12vw;
+  min-width: 120px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.defaultMainPanel { display: flex; flex-direction: column; height: 100%; }
+.centerPanel { align-items: center; }
+.modelTextBox { text-align: left; }
+.modelDropdown { margin: 2vh; }
+.panelTitle { text-align: center; margin: 0.5rem 0 1rem 0; width: 100%; }
+
+/* Model selection layout */
+.modelFields { display: flex; flex-direction: column; gap: 1rem; max-width: 380px; }
+.savingFields { display: flex; flex-direction: column; gap: 1rem; width: 100%; align-items: flex-start; margin: 0; padding-left: 2vh; }
+.savingSectionTitle { font-size: 1.25rem; font-weight: 700; margin: 0.25rem 0 0.25rem 0; width: 100%; text-align: left; }
+.savingFields > .savingSectionTitle { margin-left: 0; }
+.savingRow { display: flex; flex-wrap: nowrap; gap: 0.5rem; justify-content: flex-start; width: 100%; }
+.wideButton { min-width: clamp(180px, 22vw, 300px); max-width: 360px; white-space: normal; line-height: 1.2; padding-top: 0.75rem; padding-bottom: 0.75rem; font-size: 1.1rem; }
+/* Reduce vertical spacing between rows in Saving */
+.savingFields .modelDropdown { margin: 0.5rem 0; }
+.field-label { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; display: block; width: 100%; white-space: nowrap; }
+.modelsPanel .field-label { font-size: 1.25rem; }
+.modelsPanel .fixed-dd .dropdown-toggle { font-size: 1.1rem; }
+.fixed-dd .dropdown-toggle { min-width: 160px; justify-content: space-between; }
+
+/* Larger checkbox for manual selection toggle */
+.largeCheckbox .form-check-input { transform: scale(1.25); margin-right: 0.5rem; }
+.largeCheckbox .form-check-label { font-size: 1.25rem; }
+
+/* Key/Value table for Option 2 */
+.kvTable { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 0.5rem 1rem; max-width: 1024px; }
+.kvRow { display: contents; }
+.kvKey { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kvVal { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kvSectionTitle { margin-top: 1rem; margin-bottom: 0.25rem; font-weight: 700; }
+/* subtle gaps between grids and the heading */
+.kvTable + .kvSectionTitle { margin-top: 1.25rem; }
+.kvSectionTitle + .kvTable { margin-top: 0.5rem; }
+
+/* Images section layout with classifier panel */
+.imagesMainContainer { 
+  display: flex; 
+  gap: 5rem; 
+  flex: 1; 
+  width: 100%; 
+  align-items: center; 
+  justify-content: center;
+}
+.imagesLeftPanel { 
+  flex: 0 1 auto; 
+  display: flex; 
+  flex-direction: column;
+}
+.imageViewerContainer { 
+  display: flex; 
+  flex-direction: column;
+}
+.imageContainer { 
+  flex: 1;
+}
+.imageBarContainer { 
+  flex-shrink: 0;
+}
+.classifierPanel { 
+  flex: 0 0 18vw; 
+  width: 18vw; 
+  min-width: 220px; 
+  max-width: 360px; 
+  box-sizing: border-box; 
+  border: 5px solid #0E5258; 
+  background-color: #0E5258;
+  border-radius: 0.375rem; 
+  padding: 1vw;
+  display: flex; 
+  flex-direction: column; 
+  height: 60vh; 
+}
+.classifierTitle { 
+  font-size: 1.1rem; 
+  font-weight: 600; 
+  margin-bottom: 0.75rem; 
+  color: #ffffff; 
+  flex-shrink: 0; 
+}
+.imageList { 
+  flex: 1; 
+  overflow-y: auto; 
+  border: 1px solid #e9ecef; 
+  border-radius: 0.25rem; 
+  background-color: white; 
+}
+.imageListItem { 
+  display: flex; 
+  align-items: center; 
+  padding: 0.5rem; 
+  border-bottom: 1px solid #f1f3f4; 
+  cursor: pointer; 
+  transition: background-color 0.15s ease-in-out; 
+}
+.imageListItem:hover { 
+  background-color: #f8f9fa; 
+}
+.imageListItem.current { 
+  background-color: #e9ecef; 
+  border-left: 3px solid #007bff; 
+}
+.imageCheckbox { 
+  margin-right: 0.75rem; 
+  transform: scale(1.1);
+}
+.imageName { 
+  font-size: 0.9rem; 
+  color: #495057; 
+  flex: 1; 
+}
+.resegmentButton { 
+  width: 100%; 
+  margin-top: 1rem; 
+  padding: 0.75rem; 
+  font-size: 1rem; 
+  font-weight: 600; 
+  flex-shrink: 0; 
+}
+
+
