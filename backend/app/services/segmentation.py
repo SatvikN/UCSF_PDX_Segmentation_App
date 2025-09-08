@@ -7,7 +7,7 @@ import pydicom
 
 from app.services.images import ensure_png_slices, get_png_path
 from app.services.storage import get_study_subdir, get_study_dicom_source_dir
-from app.models.segmentation_model.architectures.r2udensenet_inference import create_r2udensenet_model, IMAGE_ROW, IMAGE_COL
+from app.models.segmentation_model.architectures.r2udensenet import create_r2udensenet_model, IMAGE_ROW, IMAGE_COL
 from app.utils.image_preprocessing import custom_normalize
 from app.services.dicom import list_dicom_files
 

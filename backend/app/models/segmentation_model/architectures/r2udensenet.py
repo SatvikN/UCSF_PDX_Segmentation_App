@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Conv2D, Conv2DTranspose, MaxPooling2D, concatenate, Input, Dropout, Add, Activation, UpSampling2D, Concatenate
+from tensorflow.keras.layers import Conv2D, Conv2DTranspose, MaxPooling2D, concatenate, Input, Dropout, Add, Activation
 from tensorflow.keras import backend as K
 import numpy as np
 from app.utils.image_preprocessing import custom_normalize

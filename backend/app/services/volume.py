@@ -1,4 +1,4 @@
-from typing import Iterable, List, Sequence, Tuple
+from typing import Iterable, List, Sequence
 
 import numpy as np
 

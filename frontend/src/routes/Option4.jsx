@@ -80,9 +80,20 @@ export default function Saving() {
 
   const handleDownloadMasksNPZ = () => {
     if (!studyId) return;
-    const q = effectivePrefix ? `?prefix=${encodeURIComponent(effectivePrefix)}` : '';
+    const params = new URLSearchParams();
+    params.append('format', 'npz');
+    if (effectivePrefix) params.append('prefix', effectivePrefix);
     const name = `${effectivePrefix ? `${effectivePrefix}_` : ''}masks.npz`;
-    download(`${apiBase}/export/${studyId}/masks.npz${q}`, name);
+    download(`${apiBase}/export/${studyId}/masks?${params.toString()}`, name);
+  };
+
+  const handleDownloadMasksMAT = () => {
+    if (!studyId) return;
+    const params = new URLSearchParams();
+    params.append('format', 'mat');
+    if (effectivePrefix) params.append('prefix', effectivePrefix);
+    const name = `${effectivePrefix ? `${effectivePrefix}_` : ''}masks.mat`;
+    download(`${apiBase}/export/${studyId}/masks?${params.toString()}`, name);
   };
 
   const handleDownloadExcel = () => {
@@ -113,6 +124,7 @@ export default function Saving() {
             <div className="savingRow">
               <Button className="wideButton" variant="outline-secondary" onClick={handleDownloadMasks} disabled={!studyId || !masksReady}>Download masks only<br/>(png)</Button>
               <Button className="wideButton" variant="outline-secondary" onClick={handleDownloadMasksNPZ} disabled={!studyId || !masksReady}>Download masks only<br/>(numpy array)</Button>
+              <Button className="wideButton" variant="outline-info" onClick={handleDownloadMasksMAT} disabled={!studyId || !masksReady}>Download masks only<br/>(MATLAB .mat)</Button>
             </div>
           </div>
           <div className="modelDropdown">

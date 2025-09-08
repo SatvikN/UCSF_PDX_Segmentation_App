@@ -1,0 +1,32 @@
+# CPU-only requirements for PDX Segmentation App
+# Use this for Docker containers or CPU-only deployments
+
+# Core FastAPI and web server dependencies
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# Data processing and scientific computing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Image processing
+pillow>=10.0.0
+scikit-image>=0.22.0
+
+# Medical imaging (DICOM)
+pydicom>=2.4.0
+
+# Machine Learning and Deep Learning (CPU only)
+tensorflow>=2.13.0
+h5py>=3.9.0
+
+# Data validation and serialization
+pydantic>=2.0.0
+
+# Excel file handling
+openpyxl>=3.1.0
+
+# Additional dependencies
+typing-extensions>=4.0.0
+scipy>=1.10.0

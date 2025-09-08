@@ -10,6 +10,6 @@ openpyxl>=3.1
 
 # TensorFlow (pick the right one for your platform)
 tensorflow-macos>=2.13; platform_system == "Darwin" and platform_machine == "arm64"
-tensorflow>=2.13; not (platform_system == "Darwin" and platform_machine == "arm64")
+tensorflow>=2.13; platform_system != "Darwin" or platform_machine != "arm64"
 
 

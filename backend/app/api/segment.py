@@ -17,7 +17,7 @@ from fastapi import Body
 import os
 from app.services.images import ensure_png_slices, get_png_path
 from app.services.storage import get_study_subdir
-from app.models.segmentation_model.architectures.r2udensenet_inference import create_r2udensenet_model, IMAGE_ROW, IMAGE_COL
+from app.models.segmentation_model.architectures.r2udensenet import create_r2udensenet_model, IMAGE_ROW, IMAGE_COL
 
 
 router = APIRouter(prefix="/segment", tags=["segment"])

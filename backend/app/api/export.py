@@ -7,6 +7,7 @@ import numpy as np
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse, StreamingResponse
 from PIL import Image
+from scipy.io import savemat
 
 from app.services.dicom import list_dicom_files
 from app.services.metadata import read_study_info, read_spacing_and_thickness_mm
@@ -101,8 +102,8 @@ async def export_volumes_excel(study_id: str, prefix: str | None = Query(None)):
     ws.append(["Image Height (px)", meta.get("height", "")])
     ws.append(["Image Width (px)", meta.get("width", "")])
     # Two blank rows before table
-    ws.append([])
-    ws.append([])
+    ws.append(["", "", ""])  # Empty row with 3 columns
+    ws.append(["", "", ""])  # Empty row with 3 columns
 
     # Header for per-slice table
     start_row = ws.max_row + 1
@@ -144,29 +145,6 @@ async def export_volumes_excel(study_id: str, prefix: str | None = Query(None)):
     })
 
 
-@router.get("/{study_id}/masks.npz")
-async def export_masks_npz(study_id: str, prefix: str | None = Query(None)):
-    masks_dir = get_study_subdir(study_id, "masks")
-    files = [f for f in sorted(os.listdir(masks_dir)) if f.lower().endswith('.png')]
-    if not files:
-        raise HTTPException(status_code=404, detail="no masks available")
-    arrs = []
-    for name in files:
-        p = os.path.join(masks_dir, name)
-        a = np.array(Image.open(p).convert('L'))
-        arrs.append((a > 127).astype(np.uint8))
-    vol = np.stack(arrs, axis=0)  # N,H,W
-    mem = io.BytesIO()
-    np.savez_compressed(mem, masks=vol)
-    mem.seek(0)
-    out_name = "masks.npz"
-    if prefix:
-        out_name = f"{prefix}_" + out_name
-    return StreamingResponse(mem, media_type="application/octet-stream", headers={
-        "Content-Disposition": f"attachment; filename={out_name}"
-    })
-
-
 @router.get("/{study_id}/images.npz")
 async def export_images_npz(study_id: str, prefix: str | None = Query(None)):
     ensure_png_slices(study_id)
@@ -189,5 +167,58 @@ async def export_images_npz(study_id: str, prefix: str | None = Query(None)):
     return StreamingResponse(mem, media_type="application/octet-stream", headers={
         "Content-Disposition": f"attachment; filename={out_name}"
     })
+
+
+@router.get("/{study_id}/masks")
+async def export_masks(study_id: str, format: str = Query("npz", description="Export format: npz, mat"), prefix: str | None = Query(None)):
+    """
+    Export masks in various formats.
+    Supports NPZ (NumPy) and MAT (MATLAB) formats.
+    """
+    masks_dir = get_study_subdir(study_id, "masks")
+    files = [f for f in sorted(os.listdir(masks_dir)) if f.lower().endswith('.png')]
+    if not files:
+        raise HTTPException(status_code=404, detail="no masks available")
+    
+    # Load all mask images and convert to binary arrays
+    mask_arrays = []
+    for name in files:
+        p = os.path.join(masks_dir, name)
+        img = Image.open(p).convert('L')
+        # Convert to binary mask (0 or 1)
+        mask = (np.array(img) > 127).astype(np.uint8)
+        mask_arrays.append(mask)
+    
+    # Stack all masks into a 3D array (num_slices, height, width)
+    masks_volume = np.stack(mask_arrays, axis=0)
+    
+    # Create file in memory based on format
+    mem = io.BytesIO()
+    
+    if format.lower() == "mat":
+        # MATLAB .mat format
+        savemat(mem, {'masks': masks_volume}, do_compression=True)
+        file_extension = "mat"
+        media_type = "application/octet-stream"
+    else:
+        # NumPy .npz format (default)
+        np.savez_compressed(mem, masks=masks_volume)
+        file_extension = "npz"
+        media_type = "application/octet-stream"
+    
+    mem.seek(0)
+    
+    # Generate filename
+    out_name = f"masks.{file_extension}"
+    if prefix:
+        out_name = f"{prefix}_{out_name}"
+    
+    return StreamingResponse(
+        mem, 
+        media_type=media_type, 
+        headers={
+            "Content-Disposition": f"attachment; filename={out_name}"
+        }
+    )
 
 
