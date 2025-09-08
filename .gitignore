@@ -21,9 +21,6 @@ backend/venv
 # Logs
 *.log
 
-# Local data
-app_data/
-
 # Build artifacts
 frontend/build
 dist
