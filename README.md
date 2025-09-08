@@ -1,5 +1,7 @@
 # PDX Segmentation App
 
+![PDX Segmentation App](frontend/src/assets/logo.png)
+
 End-to-end imaging app: React frontend + FastAPI backend.
 
 ## Quick start (single Docker container)
