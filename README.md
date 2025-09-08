@@ -39,9 +39,9 @@ Prerequisites:
 1) Backend
 ```bash
 cd backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+python -m venv pdx-segmentation-env
+source pdx-segmentation-env/bin/activate
+pip install -r ../requirements-cpu.txt
 
 # Run API
 uvicorn app.main:app --host 0.0.0.0 --port 8000
