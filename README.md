@@ -100,8 +100,8 @@ Prerequisites:
 1) Backend
 ```bash
 cd backend
-python -m venv pdx-segmentation-env
-source pdx-segmentation-env/bin/activate
+conda create -n pdx-segmentation-env python=3.11
+conda activate pdx-segmentation-env
 pip install -r ../requirements-cpu.txt
 
 # Run API
