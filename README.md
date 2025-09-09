@@ -42,8 +42,8 @@ If you're cloning this repository on a new machine, follow these steps:
 
 ### Step 1: Clone the repository
 ```bash
-git clone <your-repo-url>
-cd pdx-segmentation-app
+git clone https://github.com/SatvikN/UCSF_PDX_Segmentation_App
+cd UCSF_PDX_Segmentation_App
 ```
 
 ### Step 2: Download model weights
@@ -64,6 +64,17 @@ cd pdx-segmentation-app
 ### Step 3: Choose your deployment method
 
 #### Option A: Docker (Recommended)
+
+**From Docker Hub (if available):**
+```bash
+# Pull pre-built image
+docker pull yourusername/pdx-seg-app:latest
+
+# Run the container
+docker run -p 8000:8000 yourusername/pdx-seg-app:latest
+```
+
+**Build from source:**
 ```bash
 # Make run script executable
 chmod +x run.sh
