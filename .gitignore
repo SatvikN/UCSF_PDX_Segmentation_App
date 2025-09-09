@@ -25,3 +25,9 @@ backend/venv
 frontend/build
 dist
 build
+
+# Model weights (large files - download separately)
+*.hdf5
+*.h5
+backend/app/models/*/weights/*.hdf5
+backend/app/models/*/weights/*.h5
